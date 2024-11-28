@@ -1,0 +1,66 @@
+/* Make the sidebar fixed */
+#sidebar {
+    position: fixed; /* Keep the sidebar fixed in place */
+    top: 100px;       /* Space from the top of the viewport */
+    left: 20px;      /* Space from the left of the viewport */
+    width: 15%;      /* Sidebar width */
+    background-color: Transparent;
+    padding: 20px;
+    z-index: 10;     /* Ensures sidebar stays on top */
+    height: calc(100vh - 40px); /* Make sidebar height full page height minus top/bottom padding */
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    border-right: transparent !important;
+}
+
+/* Main content area */
+#menuItems {
+    margin-left: 22%; /* Ensure content starts after the sidebar */
+    padding: 20px;
+}
+
+/* Optional: Styling for the table and form */
+#menuTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#menuTable th, #menuTable td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+
+
+
+        
+        #sidebar ul li {
+            margin: 10px 0;
+        }
+        
+        #sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        #sidebar ul li a:hover {
+            color: saddlebrown;
+        }

@@ -4,64 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu-styles.css">
 </head>
 <body>
-    <h2>{{title}}</h2>
+<!-- Navigation Bar -->
+    <nav class="navbar">
+        <img src="assets/menu.png" span onclick="toggleNav()" class="toggle-btn"></span>
+        <ul>
+            <a href="/"><img src="/assets/logo.png" class="logo" alt="Logo"></a>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+        <!-- Register and Login Buttons -->
+        <div class="auth-links">
+            {{#firstname}}
+                <span class="user-name">Welcome, {{firstname}}</span>
+                <a href="/?logout=true" class="logout-btn">Logout</a> 
+            {{/firstname}}
+            {{^firstname}}
+                <a href="/register" class="register-btn">Register</a>
+                <a href="/login" class="login-btn">Login</a>
+            {{/firstname}}
+        </div>
+    </nav>
 
-    <!-- Table to display menu items -->
-    <table border="1" id="menuTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Select</th> <!-- Add select option -->
-            </tr>
-        </thead>
-        <tbody>
-            {{#menu}}
-            <tr>
-                <td>{{Id}}</td>
-                <td>{{Name}}</td>
-                <td>{{Type}}</td>
-                <td>{{Price}}</td>
-                <td>
-                    {{#Image}}
-                    <img src="{{Image}}" alt="{{Name}}" width="50" height="50">
-                    {{/Image}}
-                </td>
-                <td>
-                    <!-- Add a checkbox for selection -->
-                    <input type="checkbox" name="menuItems[]" value="{{Id}}"> 
-                </td>
-            </tr>
-            {{/menu}}
-        </tbody>
-    </table>
-    
-    <div id="sidebar">
-    <h3>Filter by Category</h3>
-    <ul>
-        <li><a href="#" class="filter" data-filter="hot">Best Sellers</a></li>
-        <li><a href="#" class="filter" data-filter="cold">Hot Coffees</a></li>
-        <li><a href="#" class="filter" data-filter="refreshers">Cold Coffees</a></li>
-        <li><a href="#" class="filter" data-filter="iced_tea">Iced Tea & Lemonade</a></li>
-        <li><a href="#" class="filter" data-filter="blended">Blended Beverages</a></li>
-        <li><a href="#" class="filter" data-filter="milk_juice">Milk, Juice & More</a></li>
+    <h2 id="menuTitle">Menu</h2>
+
+    <div id="container">
+        <!-- Sidebar (Filters) -->
+        <div id="sidebar">
+            <div class="category">
+                <h4>Drinks</h4>
+                <ul>
+                    <ul>
+    <li><a href="#" class="filter" data-filter="all">All</a></li>
+    <li><a href="#" class="filter" data-filter="Best Sellers">Best Sellers</a></li>
+    <li><a href="#" class="filter" data-filter="Hot Drinks">Hot Coffees</a></li>
+    <li><a href="#" class="filter" data-filter="Cold Drinks">Cold Coffees</a></li>
+    <li><a href="#" class="filter" data-filter="Refreshers">Refreshers</a></li>
+    <li><a href="#" class="filter" data-filter="Frappuccino® Blended Beverages">Frappuccino® Blended Beverages</a></li>
+    <li><a href="#" class="filter" data-filter="Iced Tea & Lemonade">Iced Tea & Lemonade</a></li>
+    <li><a href="#" class="filter" data-filter="Hot Teas">Hot Teas</a></li>
+    <li><a href="#" class="filter" data-filter="Milk, Juice & More">Milk, Juice & More</a></li>
+</ul>
+                </ul>
+            </div>
+            <div class="category">
+                <h4>Food</h4>
+                <ul>
+                    <li><a href="#" class="filter" data-filter="Hot Breakfast">Hot Breakfast</a></li>
+                    <li><a href="#" class="filter" data-filter="Oatmeal & Yogurt">Oatmeal & Yogurt</a></li>
+                    <li><a href="#" class="filter" data-filter="Pastries">Pastries</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Menu Items -->
+        <div id="menuItems">
+            <table border="1" id="menuTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Select</th>
+                    </tr>
+                </thead>
+<tbody>
+    {{#menu}}
+    <tr data-category="{{CategoryName}}">
+        <td>{{Name}}</td>
+        <td>{{Price}}</td>
+        <td>
+            {{#Image}}
+            <img src="{{Image}}" alt="{{Name}}" width="50" height="50">
+            {{/Image}}
+        </td>
+        <td>
+            <input type="checkbox" name="menuItems[]" value="{{Id}}"> 
+        </td>
+    </tr>
+    {{/menu}}
+</tbody>
+            </table>
+        </div>
+    </div>
+
+
+<script>
+ // Mapping of the category filters to full category names
+const categoryMap = {
+    all: "All Items",
+    "Best Sellers": "Best Sellers",
+    "Hot Drinks": "Hot Coffees",
+    "Cold Drinks": "Cold Coffees",
+    "Refreshers": "Refreshers",
+    "Frappuccino® Blended Beverages": "Frappuccino® Blended Beverages",
+    "Iced Tea & Lemonade": "Iced Tea & Lemonade",
+    "Hot Teas": "Hot Teas",
+    "Milk, Juice & More": "Milk, Juice & More",
+    "Hot Breakfast": "Hot Breakfast",
+    "Oatmeal & Yogurt": "Oatmeal & Yogurt",
+    "Pastries": "Pastries"
+};
+
+
+// Add event listeners to all filter links
+document.querySelectorAll('.filter').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
         
-    </ul>
-</div>
+        const category = e.target.getAttribute('data-filter');
+        const categoryName = categoryMap[category];
 
+        const menuTitle = document.getElementById('menuTitle');
+        
+        if (categoryName) {
+            menuTitle.textContent = `Menu / ${categoryName}`;
+        } else if (category === 'all') {
+            menuTitle.textContent = 'Menu / All Items';
+        }
 
-    <!-- Order form -->
-    <form action="/order/create" method="POST">
-        <label for="customerName">Customer Name:</label>
-        <input type="text" id="customerName" name="customerName" required>
-        <br><br>
-        <button type="submit">Place Order</button>
-    </form>
-</body>
+        const menuItems = document.querySelectorAll('#menuTable tbody tr');
+        
+        menuItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+
+            if (category === 'all' || itemCategory === category) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+</script>
 </html>
