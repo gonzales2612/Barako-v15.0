@@ -14,7 +14,7 @@ class OrderController extends BaseController
 
     public function __construct($conn = null)
     {
-        $this->db = $conn ?: new PDO('mysql:host=localhost;dbname=test', 'root', '');
+        $this->db = $conn ?: new PDO('mysql:host=localhost;dbname=barako', 'root', '');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->orderModel = new Order($this->db);
         $this->menuItemModel = new MenuItem($this->db);

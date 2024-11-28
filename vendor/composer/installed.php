@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'aufipt/angelmvc',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'de1e2a14897eab706e6cf38343fe6bac5ca6f27c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'aufipt/angelmvc' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'de1e2a14897eab706e6cf38343fe6bac5ca6f27c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
