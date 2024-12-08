@@ -2,34 +2,38 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Superuser;
 
 class LoginController extends BaseController
 { 
     public function loginForm() {
         $this->initializeSession();
+        // Render the superuser login form (You can change the view template if needed)
         return $this->renderView('login-form', []);
     }
 
     public function login() {
         $this->initializeSession();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
 
-            if (empty($email) || empty($password)) {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = $_POST['username'] ?? '';
+            $password = $_POST['password'] ?? '';
+            file_put_contents('log.txt', "Login attempt: Username = $username, Password = $password\n", FILE_APPEND);
+    
+            if (empty($username) || empty($password)) {
                 return $this->renderView('login-form', [
-                    'errors' => ["Email and password are required."]
+                    'errors' => ["Username and password are required."]
                 ]);
             }
 
-            $user = new User();
-            if ($user->verifyAccess($email, $password)) {
-                $this->onSuccessfulLogin($email);
+            $superuser = new Superuser();
+            if ($superuser->validateSuperuser($username, $password)) {
+                $this->onSuccessfulLogin($username);
             } else {
                 return $this->renderView('login-form', [
-                    'errors' => ["Invalid email or password."]
+                    'errors' => ["Invalid username or password."]
                 ]);
             }
         } else {
@@ -37,20 +41,15 @@ class LoginController extends BaseController
         }
     }
 
-    private function onSuccessfulLogin($email) {
-        $_SESSION['is_logged_in'] = true;
-        $_SESSION['email'] = $email;
-    
-        // Fetch the user's ID and first name from the database and store in session
-        $user = new User();
-        $userData = $user->getUserID($email); // Assuming getUserID now returns both ID and first name
-        $_SESSION['user_id'] = $userData['id'];
-        $_SESSION['firstname'] = $userData['first_name']; // Store first name in session
-    
-        // Redirect to home page after successful login
-        header("Location: /");
+    private function onSuccessfulLogin($username) {
+        $_SESSION['superuser'] = true;
+        $_SESSION['username'] = $username;
+
+        // Redirect to admin page after successful login
+        header("Location: /admin");
         exit;
     }
+
     public function logout() {
         $this->initializeSession();
         session_destroy();

@@ -672,3 +672,23 @@ button:hover {
 #sidebar ul li a:hover {
     color: #007b5e;
 }
+
+.dropdown-status {
+    width: 150px; /* Adjust width */
+    padding: 5px; /* Add padding */
+    font-size: 16px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Text color */
+    outline: none; /* Remove focus outline */
+}
+
+.dropdown-status:hover {
+    background-color: #e6e6e6; /* Background on hover */
+}
+
+.dropdown-status:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus glow */
+}

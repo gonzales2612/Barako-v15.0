@@ -4,79 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barako</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-png" href="assets/Favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b241a', // Navbar background
+                        accent: '#EBD9C1', // Text and button accents
+                        secondary: '#744f36', // Section background
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
 </head>
-<body>
-    <!-- The side navigation menu -->
-    <div id="mySidenav" class="sidenav">
-        <a href="/menu">Menu</a>
-        <a href="/faqs">FAQs</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
+<body class="bg-[#EBD9C1] font-poppins">
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <img src="assets/menu.png" span onclick="toggleNav()" class="toggle-btn"></span>
-        <ul>
-            <a href="/"><img src="/assets/logo.png" class="logo" alt="Logo"></a>
-            <li><a href="">Home</a></li>
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="">Contact</a></li>
+<!-- Navigation Bar -->
+<nav class="bg-primary shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <a href="/">
+            <img src="/assets/logo.png" class="h-12" alt="Logo">
+        </a>
+        <ul class="hidden md:flex space-x-6">
+            <li>
+                <a href="/" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="/menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Menu
+                </a>
+            </li>
+            <li>
+                <a href="/faqs" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    FAQs
+                </a>
+            </li>
+            <li>
+                <a href="/contact" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Contact
+                </a>
+            </li>
+            <li>
+                <a href="/rate-menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Rate
+                </a>
+            </li>
         </ul>
-        <!-- Register and Login Buttons -->
-<div class="auth-links">
-    {{#firstname}}
-        <span class="user-name">Welcome, {{firstname}}</span>
-        <!-- Add logout query parameter to trigger logout logic -->
-        <a href="/?logout=true" class="logout-btn">Logout</a> 
-    {{/firstname}}
-    {{^firstname}}
-        <a href="/register" class="register-btn">Register</a>
-        <a href="/login" class="login-btn">Login</a>
-    {{/firstname}}
+        <div class="flex space-x-4">
+            {{#username}}
+                <span class="text-white">Welcome, <strong>{{username}}</strong></span>
+                <a href="/?logout=true" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition">Logout</a>
+            {{/username}}
+            {{^username}}
+                
+                <a href="/login" class="px-6 py-2 border border-white bg-white text-primary rounded-full hover:bg-primary hover:text-white transition">Admin Login</a>
+            {{/username}}
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative bg-secondary">
+    <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between py-16 px-6">
+        <!-- Text Content -->
+        <div class="textBox text-white max-w-lg">
+            <h2 class="text-4xl font-bold mb-4 leading-tight">It's Not Just A Coffee <br> It's <span class="text-accent">Barako</span></h2>
+            <p class="mb-6">
+                Barako coffee: A symphony of taste and ethics.
+                Crafted with care from sustainably sourced beans, their roasts offer a range of delightful flavors.
+                Beyond coffee, Barako fosters positive change through community support.
+            </p>
+            <a href="/about" class="bg-accent text-primary px-6 py-3 rounded-full hover:bg-white hover:text-secondary transition">
+                Know More
+            </a>
+        </div>
+
+        <!-- Image -->
+        <div class="imgBox">
+            <img src="assets/frappe.png" alt="Barako Coffee" class="w-80 h-auto rounded-lg">
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Social Links -->
+<div class="container mx-auto flex justify-center space-x-6 py-6">
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/fb.png" alt="Facebook" class="h-8 w-8">
+    </a>
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/x.png" alt="Twitter" class="h-8 w-8">
+    </a>
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/ig.png" alt="Instagram" class="h-8 w-8">
+    </a>
 </div>
 
-    </nav>
+<!-- JavaScript -->
+<script>
+    function imgSlider(imageUrl) {
+        document.querySelector('.imgBox img').src = imageUrl;
+    }
+</script>
 
-    <!-- Existing Content -->
-    <section>
-        <div class="circle"></div>
-        <header></header>
-        <div class="content">
-            <div class="textBox">
-                <h2>It's Not Just A Coffee <br> It's <span>Barako</span></h2>
-                <p>Barako coffee: A symphony of taste and ethics.
-                    Crafted with care from sustainably sourced beans, their roasts offer a range of delightful flavors.
-                    Enter a warm, inspiring space where baristas create personalized cups of joy.
-                    Beyond coffee, Barako fosters positive change through community support.</p>
-                <a href="">Know More</a>
-            </div>
-        </div>
-        <div class="imgBox">
-            <img src="assets/frappe.png" class="starbucks">
-        </div>
-        <ul class="thumb">
-            <li><img src="./assets/thumb1.png" onclick="imgSlider('./assets/img1.png')"></li>
-            <li><img src="./assets/thumb2.png" onclick="imgSlider('./assets/img2.png')"></li>
-            <li><img src="./assets/thumb3.png" onclick="imgSlider('./assets/img3.png')"></li>
-        </ul>
-        <ul class="sci">
-            <li><a href=""><img src="assets/fb.png"></a></li>
-            <li><a href=""><img src="assets/x.png"></a></li>
-            <li><a href=""><img src="assets/ig.png"></a></li>
-        </ul>
-    </section>
-
-    <!-- JavaScript -->
-    <script src="script.js">
-        function toggleMenu() {
-            const menu = document.querySelector('.navbar ul');
-            menu.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barako Dashboard</title>
+    <link rel="icon" type="image/x-png" href="assets/Favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b241a',
+                        accent: '#EBD9C1',
+                        secondary: '#744f36',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-[#EBD9C1] font-poppins">
+
+<!-- Navigation Bar -->
+<nav class="bg-primary shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <a href="/"><img src="/assets/logo.png" class="h-12" alt="Logo"></a>
+        <ul class="hidden md:flex space-x-6">
+            <li><a href="/admin" class="text-accent hover:underline">Home</a></li>
+            <li><a href="/orders" class="text-accent hover:underline">Orders</a></li>
+            <li><a href="/admin/inventory" class="text-accent hover:underline">Inventory</a></li>
+        </ul>
+        <div class="flex space-x-4">
+            {{#username}}
+                <span class="text-white">Welcome, <strong>{{username}}</strong></span>
+                <a href="admin?logout=true" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition">Logout</a>
+            {{/username}}
+            {{^username}}
+                <a href="/login" class="px-6 py-2 border border-white bg-white text-primary rounded-full hover:bg-primary hover:text-white transition">Login</a>
+            {{/username}}
+        </div>
+    </div>
+</nav>
+
+<!-- Main Dashboard -->
+<div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 py-10 px-6">
+    <!-- Sidebar -->
+    <div class="bg-secondary p-6 rounded-lg shadow-md col-span-1">
+        <h3 class="text-2xl font-bold text-accent mb-4">Quick Stats</h3>
+        <ul class="space-y-4">
+            <li class="text-lg text-white">
+                <span class="font-semibold">Total Orders:</span> {{ totalOrders }}
+            </li>
+            <li class="text-lg text-white">
+                <span class="font-semibold">Total Sales:</span> $ {{ totalSales }}
+            </li>
+            <li class="text-lg text-white">
+                <span class="font-semibold">Pending Orders:</span> {{ pendingOrders }}
+            </li>
+        </ul>
+    </div>
+
+    <!-- Content Section -->
+    <div class="col-span-2 space-y-6">
+        <!-- Hero Section -->
+        <section class="relative bg-secondary p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-4xl font-bold text-white">Monthly Summary</h2>
+            </div>
+
+            <!-- Orders by Month Chart -->
+            <div id="chart-container" class="bg-[#EBD9C1] p-6 rounded-lg shadow-md mb-6">
+                <canvas id="ordersChart" width="400" height="200"></canvas>
+            </div>
+            <p id="noDataMessage" style="display: none; color: red;">No data available for the chart.</p>
+
+            <script>
+                // Use the pre-encoded JSON data passed from the controller
+                const monthlyOrders = {{{ monthlyOrders }}}; 
+
+                if (!monthlyOrders || monthlyOrders.length === 0) {
+                    document.getElementById('ordersChart').style.display = 'none';
+                    document.getElementById('noDataMessage').style.display = 'block';
+                } else {
+                    const labels = monthlyOrders.map(order => order.Month);
+                    const data = monthlyOrders.map(order => parseInt(order.OrderCount));
+
+                    const ctx = document.getElementById('ordersChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Orders',
+                                data: data,
+                                backgroundColor: '#230C02',
+                                borderColor: '#230C02',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#230C02'
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: { 
+                                    beginAtZero: true, 
+                                    grid: {
+                                        color: '#230C02'
+                                    },
+                                    ticks: {
+                                        color: '#230C02'
+                                    }
+                                },
+                                x: { 
+                                    title: { 
+                                        display: true, 
+                                        text: 'Month', 
+                                        color: '#230C02'
+                                    },
+                                    grid: {
+                                        color: '#230C02'
+                                    },
+                                    ticks: {
+                                        color: '#230C02'
+                                    }
+                                }
+                            },
+                            elements: {
+                                rectangle: {
+                                    backgroundColor: '#230C02'
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <!-- Monthly Sales Line Chart -->
+            <div id="sales-chart-container" class="bg-[#EBD9C1] p-6 rounded-lg shadow-md">
+                <canvas id="salesChart" width="400" height="200"></canvas>
+            </div>
+            <p id="noSalesDataMessage" style="display: none; color: red;">No sales data available for the chart.</p>
+
+            <script>
+                const totalSales = {{{ totalSalesByMonth }}}; 
+
+                if (!totalSales || totalSales.length === 0) {
+                    document.getElementById('salesChart').style.display = 'none';
+                    document.getElementById('noSalesDataMessage').style.display = 'block';
+                } else {
+                    const labels = totalSales.map(sale => sale.month);
+                    const data = totalSales.map(sale => parseFloat(sale.total_sales));
+
+                    const ctx = document.getElementById('salesChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total Sales',
+                                data: data,
+                                backgroundColor: 'rgba(35, 12, 2, 0.2)',
+                                borderColor: '#230C02',
+                                borderWidth: 2,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#230C02'
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: { 
+                                    beginAtZero: true, 
+                                    grid: {
+                                        color: '#230C02'
+                                    },
+                                    ticks: {
+                                        color: '#230C02'
+                                    }
+                                },
+                                x: { 
+                                    title: { 
+                                        display: true, 
+                                        text: 'Month', 
+                                        color: '#230C02'
+                                    },
+                                    grid: {
+                                        color: '#230C02'
+                                    },
+                                    ticks: {
+                                        color: '#230C02'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+        </section>
+    </div>
+</div>
+
+<!-- Social Links -->
+<div class="container mx-auto flex justify-center space-x-6 py-6">
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/fb.png" alt="Facebook" class="h-8 w-8">
+    </a>
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/x.png" alt="Twitter" class="h-8 w-8">
+    </a>
+    <a href="#" class="hover:opacity-75 transition">
+        <img src="assets/ig.png" alt="Instagram" class="h-8 w-8">
+    </a>
+</div>
+
+</body>
+</html>

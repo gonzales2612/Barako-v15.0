@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Contact Us</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +24,6 @@
         };
     </script>
 </head>
-
 <body class="bg-accent font-sans flex flex-col min-h-screen">
 
 <!-- Navigation Bar -->
@@ -73,69 +72,67 @@
     </div>
 </nav>
 
-<!-- Main Registration Form -->
-<div class="flex-grow container mx-auto flex items-center justify-center py-12 px-6">
-    <div class="bg-secondary p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 class="text-3xl font-bold text-accent text-center mb-6">Registration Form</h2>
-        <form action="/register" method="POST" class="space-y-6">
-            <!-- First Name -->
-            <div>
-                <label for="first_name" class="block text-accent font-medium mb-2">First Name <span class="text-red-500">*</span></label>
-                <input 
-                    type="text" 
-                    id="first_name" 
-                    name="first_name" 
-                    required 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                >
-            </div>
+<!-- Main Content -->
+<div class="flex-grow container mx-auto py-12 px-6">
+    <h1 class="text-4xl font-bold text-center text-primary mb-10">Contact Us</h1>
 
-            <!-- Last Name -->
-            <div>
-                <label for="last_name" class="block text-accent font-medium mb-2">Last Name <span class="text-red-500">*</span></label>
-                <input 
-                    type="text" 
-                    id="last_name" 
-                    name="last_name" 
-                    required 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                >
-            </div>
+    <!-- Contact Form -->
+    <form 
+        id="contactForm" 
+        action="/contact/submit" 
+        method="POST" 
+        class="w-full max-w-lg mx-auto bg-secondary p-6 rounded-lg shadow-lg"
+    >
+        <!-- Name -->
+        <div class="mb-6">
+            <label for="name" class="block text-accent font-medium mb-2">Your Name</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
+            >
+        </div>
 
-            <!-- Email Address -->
-            <div>
-                <label for="email" class="block text-accent font-medium mb-2">Email Address <span class="text-red-500">*</span></label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    required 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                >
-            </div>
+        <!-- Email -->
+        <div class="mb-6">
+            <label for="email" class="block text-accent font-medium mb-2">Your Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
+            >
+        </div>
 
-            <!-- Password -->
-            <div>
-                <label for="password" class="block text-accent font-medium mb-2">Password <span class="text-red-500">*</span></label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                >
-            </div>
+        <!-- Message -->
+        <div class="mb-6">
+            <label for="message" class="block text-accent font-medium mb-2">Your Message</label>
+            <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
+            ></textarea>
+        </div>
 
-            <!-- Submit Button -->
-            <div>
-                <button 
-                    type="submit" 
-                    class="w-full bg-accent text-primary py-3 rounded-lg hover:bg-white hover:text-secondary transition focus:outline-none focus:ring-2 focus:ring-secondary"
-                >
-                    Register
-                </button>
-            </div>
-        </form>
+        <!-- Submit Button -->
+        <div>
+            <button 
+                type="submit" 
+                class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-[#230C02] transition focus:outline-none focus:ring-2 focus:ring-secondary"
+            >
+                Send Message
+            </button>
+        </div>
+    </form>
+
+    <!-- Back to Home Link -->
+    <div class="text-center mt-6">
+        <a href="/" class="text-primary hover:underline">Go to Home</a>
     </div>
 </div>
 
@@ -143,6 +140,20 @@
 <footer class="bg-primary text-accent text-center py-4 mt-auto">
     <p>© 2024 Barako. All Rights Reserved.</p>
 </footer>
+
+<script>
+    // Add event listener to the form
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        
+        // Show a notification
+        alert('Thank you for your message!');
+        
+        // Optionally, submit the form after showing the message
+        this.submit();
+    });
+</script>
 
 </body>
 </html>

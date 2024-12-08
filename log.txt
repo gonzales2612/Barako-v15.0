@@ -1,0 +1,128 @@
+Login attempt: Username = admin, Password = admin
+Login successful
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login failed
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login failed
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login failed
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login failed
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = admin, Password = admin
+Login successful
+Redirecting to /admin
+Login attempt: Username = , Password = admin
+Login attempt: Username = , Password = admin
+Login attempt: Username = , Password = test
+Login attempt: Username = , Password = admin
+Login attempt: Username = , Password = admin
+Login attempt: Username = , Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = rgmmontemayor@gmail.com, Password = 123123
+Login attempt: Username = admin@auf.edu.ph, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = rgmmontemayor@gmail.com, Password = 123123
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = amdin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = rgmmontemayor, Password = smnFePe8iEcjf9M
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin1, Password = admin1
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = gonzales.christiancarlo@auf.edu.ph, Password = 1231
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = aadmin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = gonzales.christiancarlo@auf.edu.ph, Password = 1231
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin
+Login attempt: Username = admin, Password = admin

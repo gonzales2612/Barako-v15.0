@@ -3,145 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu-styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Inject custom fonts dynamically (optional if you don't modify `tailwind.config.js`)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
 </head>
-<body>
+<body class="bg-[#EBD9C1] font-Poppins">
+
 <!-- Navigation Bar -->
-    <nav class="navbar">
-        <img src="assets/menu.png" span onclick="toggleNav()" class="toggle-btn"></span>
-        <ul>
-            <a href="/"><img src="/assets/logo.png" class="logo" alt="Logo"></a>
-            <li><a href="/">Home</a></li>
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="">Contact</a></li>
+<nav class="bg-primary shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <a href="/">
+            <img src="/assets/logo.png" class="h-12" alt="Logo">
+        </a>
+        <ul class="hidden md:flex space-x-6">
+            <li>
+                <a href="/" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="/menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Menu
+                </a>
+            </li>
+            <li>
+                <a href="/faqs" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    FAQs
+                </a>
+            </li>
+            <li>
+                <a href="/contact" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Contact
+                </a>
+            </li>
+            <li>
+                <a href="/rate-menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Rate
+                </a>
+            </li>
         </ul>
-        <!-- Register and Login Buttons -->
-        <div class="auth-links">
-            {{#firstname}}
-                <span class="user-name">Welcome, {{firstname}}</span>
-                <a href="/?logout=true" class="logout-btn">Logout</a> 
-            {{/firstname}}
-            {{^firstname}}
-                <a href="/register" class="register-btn">Register</a>
-                <a href="/login" class="login-btn">Login</a>
-            {{/firstname}}
-        </div>
-    </nav>
-
-    <h2 id="menuTitle">Menu</h2>
-
-    <div id="container">
-        <!-- Sidebar (Filters) -->
-        <div id="sidebar">
-            <div class="category">
-                <h4>Drinks</h4>
-                <ul>
-                    <ul>
-    <li><a href="#" class="filter" data-filter="all">All</a></li>
-    <li><a href="#" class="filter" data-filter="Best Sellers">Best Sellers</a></li>
-    <li><a href="#" class="filter" data-filter="Hot Drinks">Hot Coffees</a></li>
-    <li><a href="#" class="filter" data-filter="Cold Drinks">Cold Coffees</a></li>
-    <li><a href="#" class="filter" data-filter="Refreshers">Refreshers</a></li>
-    <li><a href="#" class="filter" data-filter="Frappuccino® Blended Beverages">Frappuccino® Blended Beverages</a></li>
-    <li><a href="#" class="filter" data-filter="Iced Tea & Lemonade">Iced Tea & Lemonade</a></li>
-    <li><a href="#" class="filter" data-filter="Hot Teas">Hot Teas</a></li>
-    <li><a href="#" class="filter" data-filter="Milk, Juice & More">Milk, Juice & More</a></li>
-</ul>
-                </ul>
-            </div>
-            <div class="category">
-                <h4>Food</h4>
-                <ul>
-                    <li><a href="#" class="filter" data-filter="Hot Breakfast">Hot Breakfast</a></li>
-                    <li><a href="#" class="filter" data-filter="Oatmeal & Yogurt">Oatmeal & Yogurt</a></li>
-                    <li><a href="#" class="filter" data-filter="Pastries">Pastries</a></li>
-
-                </ul>
-            </div>
-        </div>
-
-        <!-- Menu Items -->
-        <div id="menuItems">
-            <table border="1" id="menuTable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Image</th>
-                        <th>Select</th>
-                    </tr>
-                </thead>
-<tbody>
-    {{#menu}}
-    <tr data-category="{{CategoryName}}">
-        <td>{{Name}}</td>
-        <td>{{Price}}</td>
-        <td>
-            {{#Image}}
-            <img src="{{Image}}" alt="{{Name}}" width="50" height="50">
-            {{/Image}}
-        </td>
-        <td>
-            <input type="checkbox" name="menuItems[]" value="{{Id}}"> 
-        </td>
-    </tr>
-    {{/menu}}
-</tbody>
-            </table>
+        <div class="flex space-x-4">
+            {{#username}}
+                <span class="text-white">Welcome, <strong>{{username}}</strong></span>
+                <a href="/?logout=true" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition">Logout</a>
+            {{/username}}
+            {{^username}}
+                
+                <a href="/login" class="px-6 py-2 border border-white bg-white text-primary rounded-full hover:bg-primary hover:text-white transition">Admin Login</a>
+            {{/username}}
         </div>
     </div>
+</nav>
+
+<!-- Page Title -->
+<div class="bg-[#EBD9C1] py-6">
+    <h2 id="menuTitle" class="text-center text-3xl font-bold text-gray-800">Menu</h2>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto mt-10 px-6 flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
+    <!-- Sidebar (Filters) -->
+    <div id="sidebar" class="bg-[#744f36] p-6 rounded-lg shadow-md w-full lg:w-1/4">
+        <h4 class="text-xl text-white font-semibold mb-4">Filter by Category</h4>
+        <ul class="space-y-2">
+            <li><a href="/menu" class="filter text-white hover:underline" data-filter="all">All Categories</a></li>
+            {{#categories}}
+            <li><a href="#" class="filter text-white hover:underline" data-filter="{{name}}">{{name}}</a></li>
+            {{/categories}}
+            <li><a href="/menu?filter=top-rated" class="filter text-white hover:underline" data-filter="top-rated">Top Rated</a></li> 
+            <li><a href="/menu?filter=most-ordered" class="filter text-white hover:underline" data-filter="most-ordered">Most Ordered</a></li>
+        </ul>
+    </div>
+
+    <!-- Menu Items -->
+    <div id="menuItems" class="bg-[#744f36] p-6 rounded-lg shadow-md w-full lg:w-3/4">
+        <form action="/orders/create" method="POST" class="space-y-4">
+            <div>
+                <label for="customerName" class="block text-white font-medium">Customer Name:</label>
+                <input 
+                    type="text" 
+                    id="customerName" 
+                    name="customerName" 
+                    required 
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                >
+            </div>
+            <div>
+                <label for="orderDate" class="block text-white font-medium">Order Date:</label>
+                <input 
+                    type="date" 
+                    id="orderDate" 
+                    name="orderDate" 
+                    required 
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                >
+            </div>
+
+            <!-- Responsive Table -->
+            <div class="overflow-x-auto">
+                <table id="menuTable" class="w-full border border-black rounded-lg">
+                    <thead class="bg-[#3b241a]">
+                        <tr>
+                            <th class="px-4 py-2 text-white text-left">Name</th>
+                            <th class="px-4 py-2 text-white text-left">Price</th>
+                            <th class="px-4 py-2 text-white text-left">Image</th>
+                            <th class="px-4 py-2 text-white text-left">Quantity</th>
+                            <th class="px-4 py-2 text-white text-left">Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#menu}}
+                        <tr data-category="{{CategoryName}}" data-rating="{{Rating}}" data-orders="{{TotalOrdered}}" class="hover:bg-gray-100 text-white hover:text-[#3b241a]">
+                            <td class="px-4 py-2">{{Name}}</td>
+                            <td class="px-4 py-2">${{Price}}</td>
+                            <td class="px-4 py-2">
+                                {{#Image}}
+                                <img src="assets/Hottea.png" alt="{{Name}}" class="h-12 w-12 rounded">
+                                {{/Image}}
+                            </td>
+                            <td class="px-4 py-2">
+                                <input type="number" name="quantities[{{Id}}]" min="1" value="1" class="w-16 border border-gray-300 rounded-lg p-2">
+                            </td>
+                            <td class="px-4 py-2">
+                                <input type="checkbox" name="menuItemIds[]" value="{{Id}}">
+                            </td>
+                        </tr>
+                        {{/menu}}
+                    </tbody>
+                </table>
+            </div>
+            
+            <button 
+                type="submit" 
+                class="w-full bg-[#EBD9C1] text-black py-3 px-6 rounded-lg hover:bg-[#3b241a] hover:text-white focus:outline-none focus:ring-2 focus:ring-green-300"
+            >
+                Place Order
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+
 
 
 <script>
- // Mapping of the category filters to full category names
-const categoryMap = {
-    all: "All Items",
-    "Best Sellers": "Best Sellers",
-    "Hot Drinks": "Hot Coffees",
-    "Cold Drinks": "Cold Coffees",
-    "Refreshers": "Refreshers",
-    "Frappuccino® Blended Beverages": "Frappuccino® Blended Beverages",
-    "Iced Tea & Lemonade": "Iced Tea & Lemonade",
-    "Hot Teas": "Hot Teas",
-    "Milk, Juice & More": "Milk, Juice & More",
-    "Hot Breakfast": "Hot Breakfast",
-    "Oatmeal & Yogurt": "Oatmeal & Yogurt",
-    "Pastries": "Pastries"
-};
+    // Dynamically build categoryMap from the template
+    const categoryMap = {
+        all: "All Categories",
+        {{#categories}}
+        "{{name}}": "{{name}}",
+        {{/categories}}
+        "top-rated": "Top Rated",
+        "most-ordered": "Most Ordered"
+    };
 
+    document.querySelectorAll('.filter').forEach(item => {
+        item.addEventListener('click', function (e) {
+            const category = e.target.getAttribute('data-filter');
+            const menuTitle = document.getElementById('menuTitle');
 
-// Add event listeners to all filter links
-document.querySelectorAll('.filter').forEach(item => {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const category = e.target.getAttribute('data-filter');
-        const categoryName = categoryMap[category];
+            // Update the page title based on the selected category
+            menuTitle.textContent = `Menu / ${categoryMap[category] || "All Categories"}`;
 
-        const menuTitle = document.getElementById('menuTitle');
-        
-        if (categoryName) {
-            menuTitle.textContent = `Menu / ${categoryName}`;
-        } else if (category === 'all') {
-            menuTitle.textContent = 'Menu / All Items';
-        }
+            const menuItems = document.querySelectorAll('#menuTable tbody tr');
+            menuItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                const itemRating = parseFloat(item.getAttribute('data-rating')) || 0;
+                const itemOrders = parseInt(item.getAttribute('data-orders')) || 0;
 
-        const menuItems = document.querySelectorAll('#menuTable tbody tr');
-        
-        menuItems.forEach(item => {
-            const itemCategory = item.getAttribute('data-category');
+                // Show or hide items based on the selected category
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = ''; // Show items that match the category
+                } else {
+                    item.style.display = 'none'; // Hide items that don't match
+                }
 
-            if (category === 'all' || itemCategory === category) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
+                // Additional filtering for "top-rated" and "most-ordered"
+                if (category === 'top-rated' && itemRating < 4) {
+                    item.style.display = 'none'; // Hide items with a rating below 4
+                }
+
+                if (category === 'most-ordered' && itemOrders === 0) {
+                    item.style.display = 'none'; // Hide items with no orders
+                }
+            });
         });
     });
-});
-
 </script>
+
+</body>
 </html>

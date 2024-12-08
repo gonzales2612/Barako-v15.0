@@ -8,6 +8,8 @@ class HomeController extends BaseController
     {
         // Check if the session should be logged out
         session_start();
+        
+        $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
         // Check if the request is from a logout action (query parameter or other way)
         if (isset($_GET['logout']) && $_GET['logout'] === 'true') {
@@ -22,6 +24,7 @@ class HomeController extends BaseController
 
         // After logout (or no session), check the session state
         $data = [
+            'username' => $username,
             'firstname' => isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true 
                 ? $_SESSION['firstname'] 
                 : null, // null means logged out

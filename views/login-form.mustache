@@ -4,55 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
 
-</head>
-<body>
-<!-- The side navigation menu -->
-    <div id="mySidenav" class="sidenav">
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <img src="assets/menu.png" span onclick="toggleNav()" class="toggle-btn"></span>
-        <h2>
-            <?php 
-                if (isset($_SESSION['firstname'])) {
-                    echo htmlspecialchars($_SESSION['firstname']);  // Display the user's first name
-                } else {
-                    echo "Username";  // Display default text if not logged in
-                }
-            ?>
-        </h2>
-        <ul>
-            <a href=""><img src="/assets/logo.png" class="logo" alt="Logo"></a>
-            <li><a href="/">Home</a></li>
-            <li><a href="">Menu</a></li>
-            <li><a href="">FAQs</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-        <!-- Register and Login Buttons -->
-        <div class="auth-links">
-            <a href="/register" class="register-btn">Register</a>
-            <a href="/login" class="login-btn">Login</a>
-        </div>
-            <!-- JavaScript -->
-    <script src="script.js">
-        function toggleMenu() {
-            const menu = document.querySelector('.navbar ul');
-            menu.classList.toggle('active');
-        }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b241a', // Navbar background
+                        accent: '#EBD9C1', // Text and button accents
+                        secondary: '#744f36', // Form background
+                        error: '#e3342f', // Error color
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                },
+            },
+        };
     </script>
-    </nav>
-    <div class="main__container">
-        <h2>Login</h2>
+</head>
+<body class="bg-accent font-sans flex flex-col min-h-screen">
 
+<!-- Navigation Bar -->
+<nav class="bg-primary shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <a href="/">
+            <img src="/assets/logo.png" class="h-12" alt="Logo">
+        </a>
+        <ul class="hidden md:flex space-x-6">
+            <li>
+                <a href="/" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="/menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Menu
+                </a>
+            </li>
+            <li>
+                <a href="/faqs" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    FAQs
+                </a>
+            </li>
+            <li>
+                <a href="/contact" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Contact
+                </a>
+            </li>
+            <li>
+                <a href="/rate-menu" class="text-accent relative after:block after:w-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300 after:mt-[3px] hover:after:w-full">
+                    Rate
+                </a>
+            </li>
+        </ul>
+        <div class="flex space-x-4">
+            {{#username}}
+                <span class="text-white">Welcome, <strong>{{username}}</strong></span>
+                <a href="/?logout=true" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition">Logout</a>
+            {{/username}}
+            {{^username}}
+                
+                <a href="/login" class="px-6 py-2 border border-white bg-white text-primary rounded-full hover:bg-primary hover:text-white transition">Admin Login</a>
+            {{/username}}
+        </div>
+    </div>
+</nav>
+
+<!-- Main Login Form -->
+<div class="flex-grow container mx-auto flex items-center justify-center py-12 px-6">
+    <div class="bg-secondary p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-3xl font-bold text-accent text-center mb-6">Admin Login</h2>
+
+        <!-- Error Messages -->
         {{#errors}}
-        <div class="alert alert-danger" role="alert">
+        <div class="bg-error text-white p-4 rounded-lg mb-6">
             <ul>
                 {{#errors}}
                     <li>{{.}}</li>
@@ -61,58 +89,73 @@
         </div>
         {{/errors}}
 
-        <form action="/login" method="post">
+        <form action="/login" method="post" class="space-y-6">
+            <!-- Email -->
             <div>
-                <label for="email">Email (required):</label>
-                <input type="text" id="email" name="email" required>
+                <label for="username" class="block text-accent font-medium mb-2">Username (required):</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
+                >
             </div>
-    
+
+            <!-- Password -->
             <div>
-                <label for="password">Password (required):</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password" class="block text-accent font-medium mb-2">Password (required):</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
+                >
             </div>
-    
-            <div class="button-container">
-                <button type="submit">Login</button>
+
+            <!-- Submit Button -->
+            <div>
+                <button 
+                    type="submit" 
+                    class="w-full bg-accent text-primary py-3 rounded-lg hover:bg-white hover:text-secondary transition focus:outline-none focus:ring-2 focus:ring-secondary"
+                >
+                    Login
+                </button>
             </div>
         </form>
     </div>
+</div>
 
-    <!-- Modal for successful login -->
-    <div id="loginSuccessModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Welcome!</h2>
-            <p>You have successfully logged in.</p>
-        </div>
+<!-- Footer -->
+<footer class="bg-primary text-accent text-center py-4 mt-auto">
+    <p>© 2024 Barako. All Rights Reserved.</p>
+</footer>
+
+<!-- Modal for successful login -->
+<div id="loginSuccessModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+        <span class="text-gray-700 font-bold cursor-pointer float-right" onclick="closeModal()">×</span>
+        <h2 class="text-2xl font-bold text-primary mb-4">Welcome!</h2>
+        <p class="text-gray-700">You have successfully logged in.</p>
     </div>
+</div>
 
-    <script>
-        // Check if the login was successful from the session
-        window.onload = function() {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] === true): ?>
-                // Show the modal
-                var modal = document.getElementById("loginSuccessModal");
-                var span = document.getElementsByClassName("close")[0];
+<script>
+    // Show modal for successful login
+    window.onload = function() {
+        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] === true): ?>
+            var modal = document.getElementById("loginSuccessModal");
+            modal.classList.remove("hidden");
+        <?php unset($_SESSION['login_success']); ?>
+        <?php endif; ?>
+    }
 
-                modal.style.display = "block";
+    function closeModal() {
+        var modal = document.getElementById("loginSuccessModal");
+        modal.classList.add("hidden");
+    }
+</script>
 
-                // Close the modal when the user clicks the close button
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
-
-                // Close the modal if the user clicks outside of it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-
-                // Reset the session flag after showing the popup
-                <?php unset($_SESSION['login_success']); ?>
-            <?php endif; ?>
-        }
-    </script>
 </body>
 </html>

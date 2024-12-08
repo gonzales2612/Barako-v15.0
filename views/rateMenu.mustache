@@ -5,25 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Tailwind Configuration
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b241a', // Navbar background
-                        accent: '#EBD9C1', // Text and accents
-                        secondary: '#744f36', // Section background
-                    },
-                    fontFamily: {
-                        openSans: ['Open Sans', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
 </head>
-<body class="bg-accent font-openSans flex flex-col min-h-screen">
+<body class="bg-[#EBD9C1] font-Poppins">
 
 <!-- Navigation Bar -->
 <nav class="bg-primary shadow-md">
@@ -71,47 +54,39 @@
     </div>
 </nav>
 
-<!-- Main Content Wrapper -->
-<div class="flex-grow">
-    <!-- FAQ Section -->
-    <div class="container mx-auto py-10 px-6">
-        <div class="faq-container bg-secondary p-6 rounded-lg shadow-md">
-            <h2 class="text-3xl font-bold text-accent text-center mb-8">{{title}}</h2>
-            {{#faqs}}
-                <div class="faq-item mb-6">
-                    <h3 
-                        onclick="toggleAnswer({{id}})" 
-                        class="text-accent text-lg font-semibold cursor-pointer bg-transparent border border-[#EBD9C1] p-4 rounded hover:bg-[#64341a] transition"
-                    >
-                        {{question}}
-                    </h3>
-                    <div 
-                        id="answer-{{id}}" 
-                        class="faq-answer mt-2 bg-[#5a3a27] border-l-4 border-accent p-4 rounded hidden"
-                    >
-                        <p class="text-accent">
-                            {{answer}}
-                        </p>
-                    </div>
-                </div>
-            {{/faqs}}
-        </div>
-    </div>
+<!-- Page Title -->
+<div class="bg-[#EBD9C1] py-6">
+    <h2 id="menuTitle" class="text-center text-3xl font-bold text-gray-800">Rate a Menu Item</h2>
 </div>
 
-<!-- Footer -->
-<footer class="bg-primary text-accent text-center py-4 mt-auto">
-    <p>© 2024 Barako. All Rights Reserved.</p>
-</footer>
+<!-- Thank You Message -->
+{{#thankYouMessage}}
+    <div class="text-center mt-4 p-3 bg-green-200 text-green-800 font-semibold rounded">
+        {{thankYouMessage}}
+    </div>
+{{/thankYouMessage}}
 
-<!-- JavaScript -->
-<script>
-    // Toggle the visibility of the FAQ answer when the question is clicked
-    function toggleAnswer(id) {
-        const answer = document.getElementById('answer-' + id);
-        answer.classList.toggle('hidden');
-    }
-</script>
+<!-- Main Content -->
+<div class="container mx-auto mt-10 px-6">
+    <form action="/rate-menu" method="POST" class="space-y-4">
+        <div>
+            <label for="menuItem" class="block text-gray-700 font-medium">Select a Menu Item to Rate:</label>
+            <select name="menuItemId" id="menuItem" class="w-full mt-2 p-3 border border-gray-300 rounded-lg" required>
+                <option value="" disabled selected>Select a menu item</option>
+                {{#menu}}
+                    <option value="{{Id}}">{{Name}} - ${{Price}}</option>
+                {{/menu}}
+            </select>
+        </div>
+
+        <div>
+            <label for="rating" class="block text-gray-700 font-medium">Rate this item (1-10):</label>
+            <input type="number" name="rating" id="rating" min="1" max="10" class="w-full mt-2 p-3 border border-gray-300 rounded-lg" required>
+        </div>
+
+        <button type="submit" class="mt-4 bg-green-500 text-white py-2 px-6 rounded-lg">Submit Rating</button>
+    </form>
+</div>
 
 </body>
 </html>
